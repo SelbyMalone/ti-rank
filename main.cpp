@@ -27,6 +27,20 @@ int getEloAdjustment(Player playerA, Player playerB) { //gets rank adjustment, a
     return getEloAdjustment(playerA.getRank(), playerB.getRank(), playerA.getScore(), playerB.getScore());
 }
 
+void compareRecurse(map<Player*, int>::iterator it1, map<Player*, int>::iterator it2, map<Player*,int>*players) {
+    if(it1==players->end()) { //if first iterator reaches the end, return
+        return;
+    }
+    if(it2==players->end()) {   //if second iterator reaches the end, increase first iterator and move second iterator
+                                //to value after first iterator
+        compareRecurse(next(it1), next(it1,2), players);
+    }
+    //comparison code
+    cout << "Comparing: " << it1->first->getName() << ":" << it1->first->getRank() << " <--> " << it2->first->getName() << ":" << it2->first->getRank() << endl;
+
+    compareRecurse(it1, next(it2), players); //increase second iterator
+}
+
 int main() {
     cout << "Enter Player Count: ";
     int playerCount;
@@ -58,11 +72,6 @@ int main() {
         players[new Player(name, race, rank, raceRank, score)] = 0;
     }
 
-    //TODO: Turn these loops into recursive functions I DESPISE NESTED LOOPS
-    for(auto it1=players.begin();it1!=players.end();it1++) {
-        for(auto it2=next(it1);it2!=players.end();it2++) {
-            cout << "Comparing: " << it1->first->getName() << ":" << it1->first->getRank() << " <--> " << it2->first->getName() << ":" << it2->first->getRank() << endl;
-        }
-    }
-
+    auto it1 = players.begin();
+    compareRecurse(it1, next(it1), &players);
 }
