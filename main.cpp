@@ -1,10 +1,10 @@
 #include <iostream>
 #include <cmath>
+#include <map>
+#include "Player.h"
 using namespace std;
 
 int developmentCoefficient = 20; //determines for Elo Adjustment how strongly a result affects changes
-
-
 
 double getScorePercent(int scoreDifference) {   //accepts a number between -14 and 14 and converts it into a range
                                                 //between 0 and 1 (-14 -> 0, 0 -> 0.5, 14 -> 1)
@@ -23,31 +23,46 @@ int getEloAdjustment(int elo, int opponentsElo, int score, int opponentsScore) {
     return round(developmentCoefficient*(scoreDifference-expectedScore));
 }
 
+int getEloAdjustment(Player playerA, Player playerB) { //gets rank adjustment, add to player A and subtract player B
+    return getEloAdjustment(playerA.getRank(), playerB.getRank(), playerA.getScore(), playerB.getScore());
+}
+
 int main() {
-    cout << "Player A's Rank: ";
-    int aRank;
-    cin >> aRank;
-    cout << "Player A's Score: ";
-    int aScore;
-    cin >> aScore;
+    cout << "Enter Player Count: ";
+    int playerCount;
+    cin >> playerCount;
 
-    cout << "Player B's Rank: ";
-    int bRank;
-    cin >> bRank;
-    cout << "Player B's Score: ";
-    int bScore;
-    cin >> bScore;
+    map<Player*, int>players; //stores each player and their total rank adjustment
+    for(int i = 0; i < playerCount;) {
+        cout << "Player " << ++i << endl;
+        cout << "Enter Player Name: ";
+        string name;
+        cin >> name;
 
-    cout << "=====" << endl;
+        cout << "Enter Player Race: ";
+        string race;
+        cin >> race;
 
-    int aAdjust = getEloAdjustment(aRank, bRank, aScore, bScore);
-    int bAdjust = -aAdjust;
+        cout << "Enter Player Rank: ";
+        int rank;
+        cin >> rank;
 
-    cout << "Player A's rank change: " << showpos << aAdjust << endl;
-    cout << "Player A's new rank: " << noshowpos << aRank + aAdjust << endl;
+        cout << "Enter Race Rank: ";
+        int raceRank;
+        cin >> raceRank;
 
-    cout << "=====" << endl;
+        cout << "Enter Player Score: ";
+        int score;
+        cin >> score;
 
-    cout << "Player B's rank change: " << showpos << bAdjust << endl;
-    cout << "Player B's new rank: " << noshowpos << bRank + bAdjust;
+        players[new Player(name, race, rank, raceRank, score)] = 0;
+    }
+
+    //TODO: Turn these loops into recursive functions I DESPISE NESTED LOOPS
+    for(auto it1=players.begin();it1!=players.end();it1++) {
+        for(auto it2=next(it1);it2!=players.end();it2++) {
+            cout << "Comparing: " << it1->first->getName() << ":" << it1->first->getRank() << " <--> " << it2->first->getName() << ":" << it2->first->getRank() << endl;
+        }
+    }
+
 }

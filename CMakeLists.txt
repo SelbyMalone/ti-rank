@@ -3,4 +3,4 @@ project(TIRank)
 
 set(CMAKE_CXX_STANDARD 17)
 
-add_executable(TIRank main.cpp)
+add_executable(TIRank main.cpp Player.h Player.cpp)
