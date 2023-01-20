@@ -4,6 +4,8 @@ using namespace std;
 
 int developmentCoefficient = 20; //determines for Elo Adjustment how strongly a result affects changes
 
+
+
 double getScorePercent(int scoreDifference) {   //accepts a number between -14 and 14 and converts it into a range
                                                 //between 0 and 1 (-14 -> 0, 0 -> 0.5, 14 -> 1)
     return ((double)scoreDifference+14)/28;

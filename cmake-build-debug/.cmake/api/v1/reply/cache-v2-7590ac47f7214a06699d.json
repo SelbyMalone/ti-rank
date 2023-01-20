@@ -55,7 +55,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "/cygdrive/c/Users/selbs/CLionProjects/TIRank/cmake-build-debug"
+			"value" : "/cygdrive/c/Users/selbs/Documents/GitHub/TIRank/cmake-build-debug"
 		},
 		{
 			"name" : "CMAKE_CACHE_MAJOR_VERSION",
@@ -543,7 +543,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "/cygdrive/c/Users/selbs/CLionProjects/TIRank/cmake-build-debug/CMakeFiles/pkgRedirects"
+			"value" : "/cygdrive/c/Users/selbs/Documents/GitHub/TIRank/cmake-build-debug/CMakeFiles/pkgRedirects"
 		},
 		{
 			"name" : "CMAKE_GENERATOR",
@@ -603,7 +603,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "/cygdrive/c/Users/selbs/CLionProjects/TIRank"
+			"value" : "/cygdrive/c/Users/selbs/Documents/GitHub/TIRank"
 		},
 		{
 			"name" : "CMAKE_INSTALL_PREFIX",
@@ -1231,7 +1231,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "/cygdrive/c/Users/selbs/CLionProjects/TIRank/cmake-build-debug"
+			"value" : "/cygdrive/c/Users/selbs/Documents/GitHub/TIRank/cmake-build-debug"
 		},
 		{
 			"name" : "TIRank_IS_TOP_LEVEL",
@@ -1255,7 +1255,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "/cygdrive/c/Users/selbs/CLionProjects/TIRank"
+			"value" : "/cygdrive/c/Users/selbs/Documents/GitHub/TIRank"
 		},
 		{
 			"name" : "_CMAKE_LINKER_PUSHPOP_STATE_SUPPORTED",

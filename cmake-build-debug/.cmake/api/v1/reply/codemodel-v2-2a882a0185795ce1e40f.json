@@ -49,8 +49,8 @@
 	"kind" : "codemodel",
 	"paths" : 
 	{
-		"build" : "/cygdrive/c/Users/selbs/CLionProjects/TIRank/cmake-build-debug",
-		"source" : "/cygdrive/c/Users/selbs/CLionProjects/TIRank"
+		"build" : "/cygdrive/c/Users/selbs/Documents/GitHub/TIRank/cmake-build-debug",
+		"source" : "/cygdrive/c/Users/selbs/Documents/GitHub/TIRank"
 	},
 	"version" : 
 	{

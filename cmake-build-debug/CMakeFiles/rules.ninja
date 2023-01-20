@@ -42,7 +42,7 @@ rule CUSTOM_COMMAND
 # Rule for re-running cmake.
 
 rule RERUN_CMAKE
-  command = /cygdrive/c/Users/selbs/AppData/Local/JetBrains/CLion2022.3/cygwin_cmake/bin/cmake.exe --regenerate-during-build -S/cygdrive/c/Users/selbs/CLionProjects/TIRank -B/cygdrive/c/Users/selbs/CLionProjects/TIRank/cmake-build-debug
+  command = /cygdrive/c/Users/selbs/AppData/Local/JetBrains/CLion2022.3/cygwin_cmake/bin/cmake.exe --regenerate-during-build -S/cygdrive/c/Users/selbs/Documents/GitHub/TIRank -B/cygdrive/c/Users/selbs/Documents/GitHub/TIRank/cmake-build-debug
   description = Re-running CMake...
   generator = 1
 
