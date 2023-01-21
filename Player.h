@@ -2,7 +2,7 @@
 
 #ifndef TIRANK_PLAYER_H
 #define TIRANK_PLAYER_H
-
+static int count = 0;
 //keeps track of a players statistics during a game
 class Player {
     private:
@@ -11,6 +11,7 @@ class Player {
         int rank;
         int raceRank;
         int score;
+        int num; //arbitrary number used for sorting
     public:
         Player(std::string name, std::string race, int rank, int raceRank, int score) {
             this->name = name; //players real name
@@ -18,14 +19,16 @@ class Player {
             this->rank = rank; //players current rank
             this->raceRank = raceRank; //players race rank
             this->score = score; //final score in game
+            num = count++;
         }
-        bool operator< (Player &p2);
         std::string getName();
         std::string getRace();
         int getRank();
         int getRaceRank();
         int getScore();
-        int adjustRank(int adjustment);
+        int adjustRank(int adjustment); //return rank after and adjustment and updates rank
+
+        bool operator< (Player &p2);
 };
 
 #endif //TIRANK_PLAYER_H

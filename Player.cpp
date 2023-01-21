@@ -24,3 +24,7 @@ int Player::adjustRank(int adjustment) {
     rank = rank+adjustment;
     return rank;
 }
+
+bool Player::operator<(Player &p2) {
+    return num<p2.num;
+}
