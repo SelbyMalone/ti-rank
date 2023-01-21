@@ -27,6 +27,7 @@ class Player {
         int getRaceRank();
         int getScore();
         int adjustRank(int adjustment); //return rank after and adjustment and updates rank
+        int adjustRaceRank(int adjustment);
 
         bool operator< (Player &p2);
 };

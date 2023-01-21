@@ -25,6 +25,11 @@ int Player::adjustRank(int adjustment) {
     return rank;
 }
 
+int Player::adjustRaceRank(int adjustment) {
+    raceRank = raceRank+adjustment;
+    return raceRank;
+}
+
 bool Player::operator<(Player &p2) {
     return num<p2.num;
 }

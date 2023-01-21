@@ -27,7 +27,7 @@ int getEloAdjustment(Player playerA, Player playerB) { //gets rank adjustment, a
 }
 
 //recursive function to compare all players score to eachother
-void compareRecurse(map<Player*, int>::iterator it1, map<Player*, int>::iterator it2, map<Player*,int>*players) {
+void compareRecurse(map<Player*,pair<int, int>>::iterator it1, map<Player*,pair<int, int>>::iterator it2, map<Player*,pair<int, int>>*players) {
     if(it1==players->end()) { //if first iterator reaches the end, return
         return;
     }
@@ -37,9 +37,15 @@ void compareRecurse(map<Player*, int>::iterator it1, map<Player*, int>::iterator
         return;
     }
     //comparison code
+    //player rank
     int adjustment = getEloAdjustment(*it1->first, *it2->first);
-    it1->second=it1->second+adjustment;
-    it2->second=it2->second-adjustment;
+    it1->second.first=it1->second.first+adjustment;
+    it2->second.first=it2->second.first-adjustment;
+
+    //race rank
+    int raceAdjustment = getEloAdjustment(it1->first->getRaceRank(), it2->first->getRaceRank(), it1->first->getScore(), it2->first->getScore());
+    it1->second.second=it1->second.second+raceAdjustment;
+    it2->second.second=it2->second.second-raceAdjustment;
 
     compareRecurse(it1, next(it2), players); //increase second iterator
 }
@@ -49,7 +55,7 @@ int main() {
     int playerCount;
     cin >> playerCount;
 
-    map<Player*, int>players; //stores each player and their total rank adjustment
+    map<Player*, pair<int, int>>players; //stores each player and their rank adjustment and their race rank adjustment
     //input each player
     for(int i = 0; i < playerCount;) {
         cout << "Player " << ++i << endl;
@@ -73,7 +79,7 @@ int main() {
         int score;
         cin >> score;
 
-        players[new Player(name, race, rank, raceRank, score)] = 0;
+        players[new Player(name, race, rank, raceRank, score)] = {0,0};
     }
 
     //compare all players score difference to all other players and store adjustment to their score in map
@@ -94,9 +100,30 @@ int main() {
         cout << " | ";
         cout << setw(5) << key->getScore();
         cout << " | ";
-        cout << setw(5) << key->getRank() << " -> " << setw(5) << key->adjustRank(val);
+        cout << setw(5) << key->getRank() << " -> " << setw(5) << key->adjustRank(val.first);
         cout << " | ";
-        cout << setw(3) << showpos << val << noshowpos;
+        cout << setw(3) << showpos << val.first << noshowpos;
+        cout << "\n";
+    }
+    cout << "-----------+-------+----------------+----" << endl;
+
+    cout << left << setw(10) << "Race";
+    cout << " | ";
+    cout << left << setw(5) << "Score";
+    cout << " | ";
+    cout << left << setw(14) << "Rank";
+    cout << " | ";
+    cout << left << setw(3) << "adj";
+    cout << "\n-----------+-------+----------------+----" << endl;
+
+    for(auto const& [key, val]:players) {
+        cout << left << setw(10) << key->getRace();
+        cout << " | ";
+        cout << setw(5) << key->getScore();
+        cout << " | ";
+        cout << setw(5) << key->getRaceRank() << " -> " << setw(5) << key->adjustRaceRank(val.second);
+        cout << " | ";
+        cout << setw(3) << showpos << val.second << noshowpos;
         cout << "\n";
     }
 }
