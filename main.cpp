@@ -5,8 +5,6 @@
 #include "Player.h"
 using namespace std;
 
-int developmentCoefficient = 40; //determines for Elo Adjustment how strongly a result affects changes
-
 double getScorePercent(int scoreDifference) {   //accepts a number between -14 and 14 and converts it into a range
                                                 //between 0 and 1 (-14 -> 0, 0 -> 0.5, 14 -> 1)
     return ((double)scoreDifference+14)/28;
@@ -15,15 +13,25 @@ double getScorePercent(int scoreDifference) {   //accepts a number between -14 a
 //performs elo calculation by using rank difference between two players to create an expected score (point difference
 // between two players) and then adjusts players ranks based on actual point difference after a game returning the
 // adjustment value
-int getEloAdjustment(int elo, int opponentsElo, int score, int opponentsScore) {
+int getEloAdjustment(int elo, int opponentsElo, int score, int opponentsScore, int K) {
     double scoreDifference = getScorePercent(score-opponentsScore);
     double expectedScore = 1/(1+pow(10,(double)(opponentsElo-elo)/400));
-    return round(developmentCoefficient*(scoreDifference-expectedScore));
+    return round(K*(scoreDifference-expectedScore));
 }
 
 //calls getEloAdjustment with player parameters
-int getEloAdjustment(Player playerA, Player playerB) { //gets rank adjustment, add to player A and subtract player B
-    return getEloAdjustment(playerA.getRank(), playerB.getRank(), playerA.getScore(), playerB.getScore());
+int getEloAdjustment(Player playerA, Player playerB, int K) { //gets rank adjustment, add to player A and subtract player B
+    return getEloAdjustment(playerA.getRank(), playerB.getRank(), playerA.getScore(), playerB.getScore(), K);
+}
+
+//uses better Elo adjustment for first place to give winner a better adjustment over everyone
+int getEloAdjustmentFirstPlace(int elo, int opponentsElo, int K) {
+    double expectedScore = 1/(1+pow(10,(double)(opponentsElo-elo)/400));
+    return round(K*(1-expectedScore));
+}
+
+int getEloAdjustmentFirstPlace(Player playerA, Player playerB, int K) {
+    return getEloAdjustmentFirstPlace(playerA.getRank(), playerB.getRank(), K);
 }
 
 //recursive function to compare all players score to eachother
@@ -37,13 +45,26 @@ void compareRecurse(map<Player*,pair<int, int>>::iterator it1, map<Player*,pair<
         return;
     }
     //comparison code
+    if(it1==players->begin()) {
+        //gives an extra "victory bonus" to the player in first place, where the score is calculated as if the victor
+        //scored 14 points and all other players have 0 points, this calculation has a significantly smaller development
+        //coefficient (K) and only serves as a small bonus on top of normal point calculation
+        int adjustment = getEloAdjustmentFirstPlace(*it1->first, *it2->first, 3);
+        it1->second.first=it1->second.first+adjustment;
+        it2->second.first=it2->second.first-adjustment;
+
+        //race rank
+        int raceAdjustment = getEloAdjustmentFirstPlace(it1->first->getRaceRank(), it2->first->getRaceRank(), 3);
+        it1->second.second=it1->second.second+raceAdjustment;
+        it2->second.second=it2->second.second-raceAdjustment;
+    }
     //player rank
-    int adjustment = getEloAdjustment(*it1->first, *it2->first);
+    int adjustment = getEloAdjustment(*it1->first, *it2->first, 30);
     it1->second.first=it1->second.first+adjustment;
     it2->second.first=it2->second.first-adjustment;
 
     //race rank
-    int raceAdjustment = getEloAdjustment(it1->first->getRaceRank(), it2->first->getRaceRank(), it1->first->getScore(), it2->first->getScore());
+    int raceAdjustment = getEloAdjustment(it1->first->getRaceRank(), it2->first->getRaceRank(), it1->first->getScore(), it2->first->getScore(), 30);
     it1->second.second=it1->second.second+raceAdjustment;
     it2->second.second=it2->second.second-raceAdjustment;
 
