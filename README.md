@@ -1,5 +1,5 @@
 # TIRank
-A ranking system made for my overcompetitve Twilight Imperium board game group to rank everyone using a modified Elo system (explained in depth later)
+A ranking system made for my overcompetitve Twilight Imperium board game group to rank everyone using a modified Elo system (explained in depth later).  Written in CLion, a C++ Compiler is needed to run
 
 ## Work Done
   Currently, the system is able to rank a game of any number of players (input validation not present) from a score between 1-14 (not enforced, but hard coded around this number, entering numbers higher would give strange results).  Whilst not explicitly mentioned in the program, do note that the winner should always be entered first as the system gives a "winners bonus" to whoever is entered first.  This will be refined at a later date.  To run the program, user must enter the player count and then for each player they must enter:
