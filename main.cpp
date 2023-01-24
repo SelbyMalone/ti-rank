@@ -5,9 +5,10 @@
 #include "Player.h"
 using namespace std;
 
-double getScorePercent(int scoreDifference) {   //accepts a number between -14 and 14 and converts it into a range
-                                                //between 0 and 1 (-14 -> 0, 0 -> 0.5, 14 -> 1)
-    return ((double)scoreDifference+14)/28;
+//accepts a number between -14 and 14 and uses logistic function to get a number between 0 and 1 where -14 point
+//difference is almost 0 and, equal score is 0.5 and +14 points is almost 1
+double getScorePercent(int scoreDifference) {
+    return 1/(1+pow(10,-0.13*scoreDifference));
 }
 
 //performs elo calculation by using rank difference between two players to create an expected score (point difference
@@ -49,22 +50,22 @@ void compareRecurse(map<Player*,pair<int, int>>::iterator it1, map<Player*,pair<
         //gives an extra "victory bonus" to the player in first place, where the score is calculated as if the victor
         //scored 14 points and all other players have 0 points, this calculation has a significantly smaller development
         //coefficient (K) and only serves as a small bonus on top of normal point calculation
-        int adjustment = getEloAdjustmentFirstPlace(*it1->first, *it2->first, 3);
+        int adjustment = getEloAdjustmentFirstPlace(*it1->first, *it2->first, 2);
         it1->second.first=it1->second.first+adjustment;
         it2->second.first=it2->second.first-adjustment;
 
         //race rank
-        int raceAdjustment = getEloAdjustmentFirstPlace(it1->first->getRaceRank(), it2->first->getRaceRank(), 3);
+        int raceAdjustment = getEloAdjustmentFirstPlace(it1->first->getRaceRank(), it2->first->getRaceRank(), 2);
         it1->second.second=it1->second.second+raceAdjustment;
         it2->second.second=it2->second.second-raceAdjustment;
     }
     //player rank
-    int adjustment = getEloAdjustment(*it1->first, *it2->first, 30);
+    int adjustment = getEloAdjustment(*it1->first, *it2->first, 20);
     it1->second.first=it1->second.first+adjustment;
     it2->second.first=it2->second.first-adjustment;
 
     //race rank
-    int raceAdjustment = getEloAdjustment(it1->first->getRaceRank(), it2->first->getRaceRank(), it1->first->getScore(), it2->first->getScore(), 30);
+    int raceAdjustment = getEloAdjustment(it1->first->getRaceRank(), it2->first->getRaceRank(), it1->first->getScore(), it2->first->getScore(), 20);
     it1->second.second=it1->second.second+raceAdjustment;
     it2->second.second=it2->second.second-raceAdjustment;
 
