@@ -50,6 +50,10 @@ void compareRecurse(map<Player*,pair<int, int>>::iterator it1, map<Player*,pair<
         //gives an extra "victory bonus" to the player in first place, where the score is calculated as if the victor
         //scored 14 points and all other players have 0 points, this calculation has a significantly smaller development
         //coefficient (K) and only serves as a small bonus on top of normal point calculation
+
+        /* TODO:Replace Pair with Struct/Class to make code more readable (replace second.first with second.rank and
+         * second.second with second.raceRank).  Struct/Class can also be used to store data to display users with
+         * breakdown for their adjustment relative to all users */
         int adjustment = getEloAdjustmentFirstPlace(*it1->first, *it2->first, 2);
         it1->second.first=it1->second.first+adjustment;
         it2->second.first=it2->second.first-adjustment;

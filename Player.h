@@ -21,6 +21,13 @@ class Player {
             this->score = score; //final score in game
             num = count++;
         }
+        Player(std::string name, std::string race, int score) {
+            this->name = name;
+            this->race = race;
+            this->score = score;
+            //TODO: Get Rank and RaceRank from file, if no entry for player/race exists in file, make new one with
+            //default rank of 1000
+        }
         std::string getName();
         std::string getRace();
         int getRank();
