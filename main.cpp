@@ -3,6 +3,7 @@
 #include <cmath>
 #include <map>
 #include "Player.h"
+#include "ScoreTracker.h"
 using namespace std;
 
 //accepts a number between -14 and 14 and uses logistic function to get a number between 0 and 1 where -14 point
@@ -13,14 +14,17 @@ double getScorePercent(int scoreDifference) {
 
 //performs elo calculation by using rank difference between two players to create an expected score (point difference
 // between two players) and then adjusts players ranks based on actual point difference after a game returning the
-// adjustment value
+// adjustment value as a pair of adjustment records (one for each player)
 
 /* TODO: Make this function also return data to break down an adjustment including, opponent name, opponent rank
  * expected score, actual score, adjustment from this opponent
  */
-int getEloAdjustment(int elo, int opponentsElo, int score, int opponentsScore, int K) {
+pair<AdjustmentRecord, AdjustmentRecord> getEloAdjustment(int elo, int opponentsElo, int score, int opponentsScore, string name, string opponentName, int K) {
     double scoreDifference = getScorePercent(score-opponentsScore);
     double expectedScore = 1/(1+pow(10,(double)(opponentsElo-elo)/400));
+    return new pair<AdjustmentRecord, AdjustmentRecord>{
+
+    };
     return round(K*(scoreDifference-expectedScore));
 }
 
@@ -40,7 +44,7 @@ int getEloAdjustmentFirstPlace(Player playerA, Player playerB, int K) {
 }
 
 //recursive function to compare all players score to eachother
-void compareRecurse(map<Player*,pair<int, int>>::iterator it1, map<Player*,pair<int, int>>::iterator it2, map<Player*,pair<int, int>>*players) {
+void compareRecurse(map<Player*,ScoreTracker*>::iterator it1, map<Player*,ScoreTracker*>::iterator it2, map<Player*,ScoreTracker*>*players) {
     if(it1==players->end()) { //if first iterator reaches the end, return
         return;
     }

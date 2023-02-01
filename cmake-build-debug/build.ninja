@@ -61,6 +61,12 @@ build CMakeFiles/TIRank.dir/Player.cpp.o: CXX_COMPILER__TIRank_Debug /cygdrive/c
   OBJECT_DIR = CMakeFiles/TIRank.dir
   OBJECT_FILE_DIR = CMakeFiles/TIRank.dir
 
+build CMakeFiles/TIRank.dir/ScoreTracker.cpp.o: CXX_COMPILER__TIRank_Debug /cygdrive/c/Users/selbs/Documents/GitHub/TIRank/ScoreTracker.cpp || cmake_object_order_depends_target_TIRank
+  DEP_FILE = CMakeFiles/TIRank.dir/ScoreTracker.cpp.o.d
+  FLAGS = -g -fdiagnostics-color=always -std=gnu++17
+  OBJECT_DIR = CMakeFiles/TIRank.dir
+  OBJECT_FILE_DIR = CMakeFiles/TIRank.dir
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target TIRank
@@ -69,7 +75,7 @@ build CMakeFiles/TIRank.dir/Player.cpp.o: CXX_COMPILER__TIRank_Debug /cygdrive/c
 #############################################
 # Link the executable TIRank.exe
 
-build TIRank.exe: CXX_EXECUTABLE_LINKER__TIRank_Debug CMakeFiles/TIRank.dir/main.cpp.o CMakeFiles/TIRank.dir/Player.cpp.o
+build TIRank.exe: CXX_EXECUTABLE_LINKER__TIRank_Debug CMakeFiles/TIRank.dir/main.cpp.o CMakeFiles/TIRank.dir/Player.cpp.o CMakeFiles/TIRank.dir/ScoreTracker.cpp.o
   FLAGS = -g
   LINK_FLAGS = -Wl,--enable-auto-import
   OBJECT_DIR = CMakeFiles/TIRank.dir
