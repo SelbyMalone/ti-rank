@@ -1,4 +1,18 @@
-C:\Users\selbs\AppData\Local\JetBrains\CLion2022.3\cygwin_cmake\bin\cmake.exe -DCMAKE_BUILD_TYPE=Debug "-DCMAKE_MAKE_PROGRAM=/cygdrive/c/Program Files/JetBrains/CLion 2022.3.1/bin/ninja/cygwin/ninja.exe" -G Ninja -S /cygdrive/c/Users/selbs/Documents/GitHub/TIRank -B /cygdrive/c/Users/selbs/Documents/GitHub/TIRank/cmake-build-debug
--- Configuring done
--- Generating done
--- Build files have been written to: /cygdrive/c/Users/selbs/Documents/GitHub/TIRank/cmake-build-debug
+C:\Users\selbs\AppData\Local\JetBrains\CLion2022.3\cygwin_cmake\bin\cmake.exe -DCMAKE_BUILD_TYPE=Debug "-DCMAKE_MAKE_PROGRAM=/cygdrive/c/Program Files/JetBrains/CLion 2022.3.1/bin/ninja/cygwin/ninja.exe" -DCMAKE_TOOLCHAIN_FILE=C:/Users/selbs/Documents/GitHub/TIRank/vcpkg/scripts/buildsystems/vcpkg.cmake -G Ninja -S /cygdrive/c/Users/selbs/Documents/GitHub/TIRank -B /cygdrive/c/Users/selbs/Documents/GitHub/TIRank/cmake-build-debug
+CMake Error at C:/Users/selbs/Documents/GitHub/TIRank/vcpkg/scripts/buildsystems/vcpkg.cmake:843 (_find_package):
+  Could not find a package configuration file provided by "jsoncpp" with any
+  of the following names:
+
+    jsoncppConfig.cmake
+    jsoncpp-config.cmake
+
+  Add the installation prefix of "jsoncpp" to CMAKE_PREFIX_PATH or set
+  "jsoncpp_DIR" to a directory containing one of the above files.  If
+  "jsoncpp" provides a separate development package or SDK, be sure it has
+  been installed.
+Call Stack (most recent call first):
+  CMakeLists.txt:8 (find_package)
+
+
+-- Configuring incomplete, errors occurred!
+See also "/cygdrive/c/Users/selbs/Documents/GitHub/TIRank/cmake-build-debug/CMakeFiles/CMakeOutput.log".
