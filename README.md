@@ -1,6 +1,6 @@
 # TIRank WIP
 A ranking system made for my overcompetitve Twilight Imperium board game group to rank everyone using a modified Elo system (explained in depth later).  Written in CLion, a C++ Compiler is needed to run
-#requirements
+# requirements
 TIRank requires Jsoncpp to run
 https://github.com/open-source-parsers/jsoncpp
 
