@@ -8,4 +8,4 @@ set(CMAKE_PREFIX_PATH "C:/vcpkg/installed/x64-windows/share")
 add_executable(TIRank main.cpp Player.h Player.cpp)
 
 find_package(jsoncpp CONFIG REQUIRED)
-target_link_libraries(TIRank PRIVATE JsonCpp::JsonCpp)
+target_link_libraries(${PROJECT_NAME} PRIVATE JsonCpp::JsonCpp)
