@@ -9,7 +9,7 @@ A ranking system made for my overcompetitve Twilight Imperium board game group t
 - Race Rank
 - Game Score
   The program will then compare all players to eachother using the modified Elo system and display their old -> new rank and the adjustment aswell as the rank adjustment for the race they play (this feature wasn't added for competitveness, more for fun as it's cool to see how different races perform on average through your group)   
-  ![image](https://user-images.githubusercontent.com/31752555/214205536-d4b039e6-134e-4b22-8411-8c56e438128a.png)
+  ![image](https://user-images.githubusercontent.com/31752555/214205536-d4b039e6-134e-4b22-8411-8c56e438128a.png)  
   (Please note these numbers are just an example from an old test version)
 ## Future Plans
 - Input Validation and more intuitive UI is planned, even if it is still terminal based.  Also allowing users to adjust the score for a game (score from 1-10 points as per default Twilight Imperium rules rather then the optional 1-14 points rule that our group exclusively plays with)
