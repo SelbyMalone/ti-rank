@@ -1,6 +1,6 @@
 #include <string>
 #include <tuple>
-#include <jsoncpp/json/json.h>
+#include <json/json.h>
 
 #ifndef TIRANK_PLAYER_H
 #define TIRANK_PLAYER_H
@@ -29,13 +29,16 @@ constexpr void for_sequence(std::integer_sequence<T, S...>, F&& f) {
 
 //unserialize from JSON
 template<typename T>
-T fromJSON(const Json::)
+T fromJSON(const Json::Value& data);
 
 //serialize to JSON
+template<typename T>
+Json::Value toJson(const T& object);
 
 
-static int count = 0;
 //keeps track of a players statistics during a game
+static int count = 0;
+
 class Player {
     private:
         int num; //arbitrary number used for sorting
@@ -84,6 +87,7 @@ class Player {
                 property(&Player::raceGamesPlayed, "gamesPlayed"),
                 property(&Player::averageScore, "raceAverageScore")
                 );
+
         std::string getName();
         std::string getRace();
         int getRank();
