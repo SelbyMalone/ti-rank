@@ -1,6 +1,6 @@
 #include <string>
 #include <tuple>
-#include <json/json.h>
+#include "json/json.h"
 
 #ifndef TIRANK_PLAYER_H
 #define TIRANK_PLAYER_H
@@ -46,7 +46,7 @@ class Player {
         std::string name;
         std::string race;
         int rank;
-        int raceRank;
+        int raceRank = 1000;
 
         int score;
 
@@ -56,21 +56,33 @@ class Player {
         double averageScore;
         double raceAverageScore;
     public:
-        Player(std::string name, std::string race, int rank, int raceRank, int score) {
+        Player() {
+            name = "";
+            race = "";
+            rank = 1000;
+            raceRank = 1000;
+            score = 0;
+        }
+
+        Player(std::string name, std::string race, int score, int rank) {
             this->name = name; //players real name
             this->race = race; //in game faction
             this->rank = rank; //players current rank
-            this->raceRank = raceRank; //players race rank
             this->score = score; //final score in game
             num = count++;
         }
-        Player(std::string name, std::string race, int score) {
+        Player(std::string name, std::string race, int score, Json::Value playerFile) {
             this->name = name;
             this->race = race;
             this->score = score;
             num = count++;
             //TODO: Get Rank and RaceRank from file, if no entry for player/race exists in file, make new one with
             //default rank of 1000
+
+            Player loadedFile = fromJSON<Player>(playerFile);
+            this->rank = loadedFile.getRank();
+            this->gamesPlayed = loadedFile.getRank()+1;
+            this->averageScore = (loadedFile.averageScore + averageScore)/2;
         }
         //make tuple of player stats
         constexpr static auto propertiesPlayer = std::make_tuple(

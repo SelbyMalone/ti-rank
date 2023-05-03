@@ -1,5 +1,6 @@
 #include <iostream>
 #include <iomanip>
+#include <fstream>
 #include <cmath>
 #include <map>
 #include "Player.h"
@@ -90,19 +91,26 @@ int main() {
         string race;
         cin >> race;
 
-        cout << "Enter Player Rank: ";
-        int rank;
-        cin >> rank;
-
-        cout << "Enter Race Rank: ";
-        int raceRank;
-        cin >> raceRank;
-
         cout << "Enter Player Score: ";
         int score;
         cin >> score;
 
-        players[new Player(name, race, rank, raceRank, score)] = {0,0};
+        ifstream playerFile;
+        playerFile.open("Players/"+name+".json");
+
+        if(playerFile) {
+            Json::Reader reader;
+            Json::Value jsonFile;
+            reader.parse(playerFile, jsonFile);
+
+            players[new Player(name, race, score, jsonFile)] = {0,0};
+        } else {
+            cout << "Enter Player Rank: ";
+            int rank;
+            cin >> rank;
+
+            players[new Player(name, race, score, rank)] = {0,0};
+        }
     }
 
     //compare all players score difference to all other players and store adjustment to their score in map
@@ -127,6 +135,9 @@ int main() {
         cout << " | ";
         cout << setw(3) << showpos << val.first << noshowpos;
         cout << "\n";
+
+        Json::Value outJson = toJson(key);
+        cout << outJson << endl;
     }
     cout << "-----------+-------+----------------+----" << endl;
 

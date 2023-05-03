@@ -39,18 +39,18 @@ T fromJSON(const Json::Value& data) {
     T object;
 
     //get number of properties
-    constexpr auto nbProperties  = std::tuple_size<decltype(T::properties)>::value;
+    constexpr auto nbProperties  = std::tuple_size<decltype(T::propertiesPlayer)>::value;
 
     //iterate on index sequence of size nbProperties
     for_sequence(std::make_index_sequence<nbProperties>{}, [&](auto i) {
         //get property
-        constexpr auto property = std::get<i>(T::properties);
+        constexpr auto property = std::get<i>(T::propertiesPlayer);
 
         //get property type
         using Type = typename decltype(property)::Type;
 
         //set value to the member
-        object.*(property.member) = fromJSON<Type>(data[property.name]);
+        object.*(property.member) = data[property.name].template as<Type>();
     });
 
     return object;
