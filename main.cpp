@@ -69,7 +69,9 @@ void compareRecurse(map<Player*,pair<int, int>>::iterator it1, map<Player*,pair<
     it1->second.second=it1->second.second+raceAdjustment;
     it2->second.second=it2->second.second-raceAdjustment;
 
-    compareRecurse(it1, next(it2), players); //increase second iterator
+    if(next(it2) != players->end()) {
+        compareRecurse(it1, next(it2), players); //increase second iterator
+    }
 }
 
 int main() {
