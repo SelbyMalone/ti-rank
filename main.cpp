@@ -39,7 +39,6 @@ int getEloAdjustmentFirstPlace(Player playerA, Player playerB, int K) {
 void compareRecurse(map<Player*,pair<int, int>>::iterator it1, map<Player*,pair<int, int>>::iterator it2, map<Player*,pair<int, int>>*players) {
     //comparison code
     if(it1==players->begin()) {
-        cout << "THIS LINE IS WORK" << endl;
         //gives an extra "victory bonus" to the player in first place, where the score is calculated as if the victor
         //scored 14 points and all other players have 0 points, this calculation has a significantly smaller development
         //coefficient (K) and only serves as a small bonus on top of normal point calculation
