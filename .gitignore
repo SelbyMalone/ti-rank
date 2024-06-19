@@ -4,6 +4,7 @@
 /out
 /cmake-build-debug
 CMakePresets.json
+
 # dependencies
 /node_modules
 /.pnp
