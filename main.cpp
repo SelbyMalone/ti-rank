@@ -66,7 +66,7 @@ void compareRecurse(map<Player*, pair<int, int>>& players, vector<Player*>& play
         //race rank
         int raceAdjustment = getEloAdjustmentFirstPlace((*it1)->getRaceRank(), (*it2)->getRaceRank(), 2);
         players[*it1].second+=raceAdjustment;
-        players[*it2].second += raceAdjustment;
+        players[*it2].second -= raceAdjustment;
     }
     //player rank
     int adjustment = getEloAdjustment(*it1, *it2, 20);
@@ -76,7 +76,7 @@ void compareRecurse(map<Player*, pair<int, int>>& players, vector<Player*>& play
     //race rank
     int raceAdjustment = getEloAdjustment((*it1)->getRaceRank(), (*it2)->getRaceRank(), (*it1)->getScore(), (*it2)->getScore(), 20);
     players[*it1].second += raceAdjustment;
-    players[*it2].second += raceAdjustment;
+    players[*it2].second -= raceAdjustment;
 
     compareRecurse(players, playerOrder, it1, ++it2); //increase second iterator
 }
