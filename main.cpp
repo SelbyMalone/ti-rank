@@ -2,6 +2,7 @@
 #include <iomanip>
 #include <cmath>
 #include <map>
+#include <vector>
 #include "Player.h"
 using namespace std;
 
@@ -21,8 +22,8 @@ int getEloAdjustment(int elo, int opponentsElo, int score, int opponentsScore, i
 }
 
 //calls getEloAdjustment with player parameters
-int getEloAdjustment(Player playerA, Player playerB, int K) { //gets rank adjustment, add to player A and subtract player B
-    return getEloAdjustment(playerA.getRank(), playerB.getRank(), playerA.getScore(), playerB.getScore(), K);
+int getEloAdjustment(Player* playerA, Player* playerB, int K) { //gets rank adjustment, add to player A and subtract player B
+    return getEloAdjustment(playerA->getRank(), playerB->getRank(), playerA->getScore(), playerB->getScore(), K);
 }
 
 //uses better Elo adjustment for first place to give winner a better adjustment over everyone
@@ -31,54 +32,53 @@ int getEloAdjustmentFirstPlace(int elo, int opponentsElo, int K) {
     return round(K*(1-expectedScore));
 }
 
-int getEloAdjustmentFirstPlace(Player playerA, Player playerB, int K) {
-    return getEloAdjustmentFirstPlace(playerA.getRank(), playerB.getRank(), K);
+int getEloAdjustmentFirstPlace(Player* playerA, Player* playerB, int K) {
+    return getEloAdjustmentFirstPlace(playerA->getRank(), playerB->getRank(), K);
 }
 
 //recursive function to compare all players score to eachother
-void compareRecurse(map<Player*, pair<int, int>>& players, typename map<Player*,pair<int, int>>::iterator it1, typename map<Player*,pair<int, int>>::iterator it2) {
+void compareRecurse(map<Player*, pair<int, int>>& players, vector<Player*>& playerOrder,
+                    vector<Player*>::iterator it1, vector<Player*>::iterator it2) {
     //if it1 equals players.end, return
-    if (it1 == players.end()) {
+    if (it1 == playerOrder.end()) {
         return;
     }
 
-    if (it2 == players.end()) {
+    if (it2 == playerOrder.end()) {
         ++it1;
         it2 = it1;
-        if (it2 != players.end()) {
+        if (it2 != playerOrder.end()) {
             ++it2;
         }
-        compareRecurse(players, it1, it2);
+        compareRecurse(players, playerOrder, it1, it2);
         return;
     }
 
-    cout << "Comparing " << it1->first->getName() << " with " << it2->first->getName() << endl;
-
     //comparison code
-    if(it1==players.begin()) {
+    if(it1==playerOrder.begin()) {
         //gives an extra "victory bonus" to the player in first place, where the score is calculated as if the victor
         //scored 14 points and all other players have 0 points, this calculation has a significantly smaller development
         //coefficient (K) and only serves as a small bonus on top of normal point calculation
-        int adjustment = getEloAdjustmentFirstPlace(*it1->first, *it2->first, 2);
-        it1->second.first=it1->second.first+adjustment;
-        it2->second.first=it2->second.first-adjustment;
+        int adjustment = getEloAdjustmentFirstPlace(*it1, *it2, 2);
+        players[*it1].first+=adjustment;
+        players[*it2].first-=adjustment;
 
         //race rank
-        int raceAdjustment = getEloAdjustmentFirstPlace(it1->first->getRaceRank(), it2->first->getRaceRank(), 2);
-        it1->second.second=it1->second.second+raceAdjustment;
-        it2->second.second=it2->second.second-raceAdjustment;
+        int raceAdjustment = getEloAdjustmentFirstPlace((*it1)->getRaceRank(), (*it2)->getRaceRank(), 2);
+        players[*it1].second+=raceAdjustment;
+        players[*it2].second += raceAdjustment;
     }
     //player rank
-    int adjustment = getEloAdjustment(*it1->first, *it2->first, 20);
-    it1->second.first=it1->second.first+adjustment;
-    it2->second.first=it2->second.first-adjustment;
+    int adjustment = getEloAdjustment(*it1, *it2, 20);
+    players[*it1].first += adjustment;
+    players[*it2].first -= adjustment;
 
     //race rank
-    int raceAdjustment = getEloAdjustment(it1->first->getRaceRank(), it2->first->getRaceRank(), it1->first->getScore(), it2->first->getScore(), 20);
-    it1->second.second=it1->second.second+raceAdjustment;
-    it2->second.second=it2->second.second-raceAdjustment;
+    int raceAdjustment = getEloAdjustment((*it1)->getRaceRank(), (*it2)->getRaceRank(), (*it1)->getScore(), (*it2)->getScore(), 20);
+    players[*it1].second += raceAdjustment;
+    players[*it2].second += raceAdjustment;
 
-    compareRecurse(players, it1, ++it2); //increase second iterator
+    compareRecurse(players, playerOrder, it1, ++it2); //increase second iterator
 }
 
 int main() {
@@ -87,6 +87,9 @@ int main() {
     cin >> playerCount;
 
     map<Player*, pair<int, int>>players; //stores each player and their rank adjustment and their race rank adjustment
+    vector<Player*> playerOrder; //preserve the order players are entered
+
+
     //input each player
     for(int i = 0; i < playerCount;) {
         cout << "Player " << ++i << endl;
@@ -110,12 +113,14 @@ int main() {
         int score;
         cin >> score;
 
-        players[new Player(name, race, rank, raceRank, score)] = {0,0};
+        Player* newplayer = new Player(name, race, rank, raceRank, score);
+        players[newplayer] = { 0, 0 };
+        playerOrder.push_back(newplayer);
     }
 
     //compare all players score difference to all other players and store adjustment to their score in map
-    auto it1 = players.begin();
-    compareRecurse(players,it1, next(it1));
+    auto it1 = playerOrder.begin();
+    compareRecurse(players, playerOrder, it1, next(it1));
 
     cout << left << setw(10) << "Player";
     cout << " | ";
@@ -126,14 +131,14 @@ int main() {
     cout << left << setw(3) << "adj";
     cout << "\n-----------+-------+----------------+----" << endl;
 
-    for(auto const& [key, val]:players) {
-        cout << left << setw(10) << key->getName();
+    for(auto & it : playerOrder) {
+        cout << left << setw(10) << it->getName();
         cout << " | ";
-        cout << setw(5) << key->getScore();
+        cout << setw(5) << it->getScore();
         cout << " | ";
-        cout << setw(5) << key->getRank() << " -> " << setw(5) << key->adjustRank(val.first);
+        cout << setw(5) << it->getRank() << " -> " << setw(5) << it->adjustRank(players[it].first);
         cout << " | ";
-        cout << setw(3) << showpos << val.first << noshowpos;
+        cout << setw(3) << showpos << players[it].first << noshowpos;
         cout << "\n";
     }
     cout << "-----------+-------+----------------+----" << endl;
@@ -147,14 +152,14 @@ int main() {
     cout << left << setw(3) << "adj";
     cout << "\n-----------+-------+----------------+----" << endl;
 
-    for(auto const& [key, val]:players) {
-        cout << left << setw(10) << key->getRace();
+    for (auto& it : playerOrder) {
+        cout << left << setw(10) << it->getRace();
         cout << " | ";
-        cout << setw(5) << key->getScore();
+        cout << setw(5) << it->getScore();
         cout << " | ";
-        cout << setw(5) << key->getRaceRank() << " -> " << setw(5) << key->adjustRaceRank(val.second);
+        cout << setw(5) << it->getRaceRank() << " -> " << setw(5) << it->adjustRaceRank(players[it].second);
         cout << " | ";
-        cout << setw(3) << showpos << val.second << noshowpos;
+        cout << setw(3) << showpos << players[it].second << noshowpos;
         cout << "\n";
     }
 }
