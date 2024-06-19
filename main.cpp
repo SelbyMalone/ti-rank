@@ -92,7 +92,13 @@ int main() {
 
     //input each player
     for(int i = 0; i < playerCount;) {
-        cout << "Player " << ++i << endl;
+        if (i == 0) {
+            cout << "Winner" << endl;
+            ++i;
+        }
+        else {
+            cout << "Player " << ++i << endl;
+        }
         cout << "Enter Player Name: ";
         string name;
         cin >> name;
