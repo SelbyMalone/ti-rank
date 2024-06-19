@@ -36,9 +36,26 @@ int getEloAdjustmentFirstPlace(Player playerA, Player playerB, int K) {
 }
 
 //recursive function to compare all players score to eachother
-void compareRecurse(map<Player*,pair<int, int>>::iterator it1, map<Player*,pair<int, int>>::iterator it2, map<Player*,pair<int, int>>*players) {
+void compareRecurse(map<Player*, pair<int, int>>& players, typename map<Player*,pair<int, int>>::iterator it1, typename map<Player*,pair<int, int>>::iterator it2) {
+    //if it1 equals players.end, return
+    if (it1 == players.end()) {
+        return;
+    }
+
+    if (it2 == players.end()) {
+        ++it1;
+        it2 = it1;
+        if (it2 != players.end()) {
+            ++it2;
+        }
+        compareRecurse(players, it1, it2);
+        return;
+    }
+
+    cout << "Comparing " << it1->first->getName() << " with " << it2->first->getName() << endl;
+
     //comparison code
-    if(it1==players->begin()) {
+    if(it1==players.begin()) {
         //gives an extra "victory bonus" to the player in first place, where the score is calculated as if the victor
         //scored 14 points and all other players have 0 points, this calculation has a significantly smaller development
         //coefficient (K) and only serves as a small bonus on top of normal point calculation
@@ -61,14 +78,7 @@ void compareRecurse(map<Player*,pair<int, int>>::iterator it1, map<Player*,pair<
     it1->second.second=it1->second.second+raceAdjustment;
     it2->second.second=it2->second.second-raceAdjustment;
 
-    if(next(it2) == players->end()) {
-        if (next(it1, 2) == players->end()) {
-            return;
-        }
-        compareRecurse(next(it1), next(it1, 2), players);
-        return;
-    }
-    compareRecurse(it1, next(it2), players); //increase second iterator
+    compareRecurse(players, it1, ++it2); //increase second iterator
 }
 
 int main() {
@@ -105,7 +115,7 @@ int main() {
 
     //compare all players score difference to all other players and store adjustment to their score in map
     auto it1 = players.begin();
-    compareRecurse(it1, next(it1), &players);
+    compareRecurse(players,it1, next(it1));
 
     cout << left << setw(10) << "Player";
     cout << " | ";
