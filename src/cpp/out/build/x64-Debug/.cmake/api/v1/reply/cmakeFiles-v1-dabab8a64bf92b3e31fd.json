@@ -9,15 +9,6 @@
 			"path" : "out/build/x64-Debug/CMakeFiles/3.28.0-msvc1/CMakeSystem.cmake"
 		},
 		{
-			"isExternal" : true,
-			"path" : "C:/vcpkg/scripts/buildsystems/vcpkg.cmake"
-		},
-		{
-			"isCMake" : true,
-			"isExternal" : true,
-			"path" : "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.28/Modules/CMakeDependentOption.cmake"
-		},
-		{
 			"isCMake" : true,
 			"isExternal" : true,
 			"path" : "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.28/Modules/CMakeSystemSpecificInitialize.cmake"
@@ -153,8 +144,8 @@
 	"kind" : "cmakeFiles",
 	"paths" : 
 	{
-		"build" : "C:/Users/selbs/Documents/GitHub/TIRank/out/build/x64-Debug",
-		"source" : "C:/Users/selbs/Documents/GitHub/TIRank"
+		"build" : "C:/Users/selbs/Documents/GitHub/ti-rank/src/cpp/out/build/x64-Debug",
+		"source" : "C:/Users/selbs/Documents/GitHub/ti-rank/src/cpp"
 	},
 	"version" : 
 	{

@@ -9,7 +9,7 @@
 					"jsonFile" : "directory-.-Debug-d0094a50bb2071803777.json",
 					"minimumCMakeVersion" : 
 					{
-						"string" : "3.23.2"
+						"string" : "3.23"
 					},
 					"projectIndex" : 0,
 					"source" : ".",
@@ -27,7 +27,7 @@
 					[
 						0
 					],
-					"name" : "TIRank",
+					"name" : "ti-rank",
 					"targetIndexes" : 
 					[
 						0
@@ -39,7 +39,7 @@
 				{
 					"directoryIndex" : 0,
 					"id" : "TIRank::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-TIRank-Debug-f57be2cf60e4c1dbfc0c.json",
+					"jsonFile" : "target-TIRank-Debug-3fb9b8c35f7659036a83.json",
 					"name" : "TIRank",
 					"projectIndex" : 0
 				}
@@ -49,12 +49,12 @@
 	"kind" : "codemodel",
 	"paths" : 
 	{
-		"build" : "C:/Users/selbs/Documents/GitHub/TIRank/cmake-build-debug",
-		"source" : "C:/Users/selbs/Documents/GitHub/TIRank"
+		"build" : "C:/Users/selbs/Documents/GitHub/ti-rank/src/cpp/out/build/x64-Debug",
+		"source" : "C:/Users/selbs/Documents/GitHub/ti-rank/src/cpp"
 	},
 	"version" : 
 	{
 		"major" : 2,
-		"minor" : 4
+		"minor" : 6
 	}
 }
