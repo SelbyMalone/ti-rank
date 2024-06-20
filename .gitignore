@@ -3,3 +3,4 @@
 .idea
 /out
 /cmake-build-debug
+CMakePresets.json
