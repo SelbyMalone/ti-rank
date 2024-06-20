@@ -1,7 +1,7 @@
 
 .vs
 .idea
-out/
+/out
 /src/cpp/out
 /src/cpp/build
 /src/cpp/cmake-build-debug
