@@ -2,39 +2,28 @@
     text-align: center;
 }
 
-.App-header {
-    background-color: #0D1323;
-    padding: 20px;
+.row-flex {
+    display: flex;
+    height: 100vh;
+}
+
+.header {
+    background-color: #282c34;
     color: white;
-    position: fixed;
-    top: 0;
-    width: 100%;
-    height: 30px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 24px;
-    box-shadow: 0 4px 2px -2px #060910;
-}
-
-.App-body {
-    display: flex;
-    margin-top: 60px; /* Adjust this to match the height of the header */
-}
-
-.App-main-content {
-    flex: 1;
     padding: 20px;
+    text-align: center;
+    font-size: 24px;
+    width: 100%;
+}
+
+.main-content {
+    flex: 4;
     background: #223158 url('../public/background.jpg') no-repeat center center;
     background-size: cover;
-    box-sizing: border-box;
-    text-decoration-color: white;
 }
 
-.App-sidebar {
-    width: 360px;
-    background-color: white;
-    padding: 20px;
-    height: calc(100vh - 60px); /* Full height minus the header height */
-    box-sizing: border-box;
+.sidebar {
+    flex: 1;
+    background-color: #ccc;
+    text-align: center;
 }
