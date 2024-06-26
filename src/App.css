@@ -1,3 +1,9 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 .App {
     text-align: center;
 }
@@ -16,14 +22,37 @@
     width: 100%;
 }
 
+/* main content area styling */
+
 .main-content {
     flex: 4;
-    background: #223158 url('../public/background.jpg') no-repeat center center;
+    background: #223158 url('../public/background.jpg') no-repeat center center; 
     background-size: cover;
 }
+
+/* side bar styling */
 
 .sidebar {
     flex: 1;
     background-color: #ccc;
     text-align: center;
+}
+
+.player-box {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 40px;
+    width: 100%;
+    border-bottom: 1px solid #ccc;
+    padding: 0 25px;
+    box-sizing: border-box;
+}
+
+.player-name {
+    text-align: left;
+}
+
+.player-rank {
+    text-align: right;
 }
