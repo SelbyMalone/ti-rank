@@ -14,12 +14,32 @@
 }
 
 .header {
+    display: flex;
+    align-items: center;
+    justify-content:center;
     background-color: #282c34;
     color: white;
-    padding: 20px;
-    text-align: center;
-    font-size: 24px;
+    padding: 15px;
+    font-size: 20px;
     width: 100%;
+    position: relative;
+}
+
+.header-text {
+    padding: 0px 25px;
+    flex-grow: 1;
+}
+
+.header-left-text {
+    flex-grow: 1;
+    text-align: left;
+    padding: 0px 25px;
+}
+
+
+.header-subtext-right {
+    font-size: 15px;
+    text-align: right;
 }
 
 /* main content area styling */
@@ -38,21 +58,65 @@
     text-align: center;
 }
 
+
 .player-box {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    height: 40px;
+    height: 35px;
     width: 100%;
-    border-bottom: 1px solid #ccc;
     padding: 0 25px;
     box-sizing: border-box;
 }
 
+
 .player-name {
     text-align: left;
+    display: inline-block;
+    width: 80px;
 }
 
 .player-rank {
     text-align: right;
+    font-family: "Lucida Console", "monospace";
+    display: inline-block;
+    width: 70px; /* Adjust this value as needed to align the numbers */
 }
+
+
+/* rank colors */
+
+.bronze {
+    background-color: #dc935c;
+}
+
+.bronze-dark {
+    background-color: #d9884c;
+}
+
+.silver {
+    background-color: #D8D8D8;
+}
+
+.silver-dark {
+    background-color: #cecece;
+}
+
+
+.gold {
+    background-color: #FDE37F;
+}
+
+.gold-dark {
+    background-color: #fddf6c;
+}
+
+.unranked {
+    background-color: #f37360;
+}
+
+.unranked-dark {
+    background-color: #f2634e;
+}
+
+

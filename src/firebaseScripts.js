@@ -37,7 +37,12 @@ export const usePlayers = () => {
 
             //sort out players by rank
             ranked.sort((a, b) => b.rank - a.rank);
-
+            unranked.sort((a, b) => {
+                if (b.gameCount !== a.gameCount) {
+                    return b.gameCount - a.gameCount;
+                }
+                return b.rank - a.rank;
+            });
             setRankedPlayers(ranked);
             setUnrankedPlayers(unranked);
         }

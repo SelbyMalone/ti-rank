@@ -1,10 +1,11 @@
 import React from 'react';
 import './App.css';
 import { usePlayers } from './firebaseScripts'
+import { getRankColor } from './getRankColor.js'
 
 
 function App() {
-    const { rankedPlayers } = usePlayers();
+    const { rankedPlayers, unrankedPlayers } = usePlayers();
 
     // format numbers with commas
     const formatNumberWithCommas = (number) => {
@@ -25,12 +26,36 @@ function App() {
                     Ranks
                 </div>
 
-                {rankedPlayers.map(player => (
-                    <div key={player.name} className="player-box">
-                        <span className="player-name">{player.name}</span>
-                        <span className="player-rank">{formatNumberWithCommas(player.rank)}</span>
-                    </div>
-                ))}
+                {rankedPlayers.map((player, index) => {
+                    let rankColor = getRankColor(player.rank);
+                    const isEvenRow = index % 2 === 0;
+
+                    rankColor = isEvenRow ? rankColor : rankColor.concat("-dark")
+                    
+                    return (
+                        <div key={player.name} className={`player-box ${rankColor}`}>
+                            <span className="player-name">{player.name}</span>
+                            <span className="player-rank">{formatNumberWithCommas(player.rank)}</span>
+                        </div>
+                    );
+                })}
+
+                <div className="header">
+                    <span className="header-left-text">Unranked</span>
+                    <span className="header-subtext-right">games until rank</span>
+                </div>
+                {unrankedPlayers.map((player, index) => {
+                    const isEvenRow = index % 2 === 0;
+                    const rankColor = isEvenRow ? "unranked" : "unranked-dark"
+
+                    return (
+                        <div key={player.name} className={`player-box ${rankColor}`}>
+                            <span className="player-name">{player.name}</span>
+                            <span className="player-rank">{formatNumberWithCommas(player.rank)}</span>
+                            <span className="player-rank">{3-player.gameCount}</span>
+                        </div>
+                    );
+                })}
             </div>
         </div>
     );
