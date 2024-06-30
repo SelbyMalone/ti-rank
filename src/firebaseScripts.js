@@ -6,10 +6,12 @@ import { useEffect, useState } from 'react';
 // Initialize Firestore
 const db = getFirestore(app);
 
+const group = "/Groups/uYmHldpJVY2K0uiEH99L"
+
 // query Firestore and log the results
 const getPlayers = async () => {
     try {
-        const querySnapshot = await getDocs(collection(db, "/Groups/uYmHldpJVY2K0uiEH99L/Players"));
+        const querySnapshot = await getDocs(collection(db, `${group}/Players`));
         const ranked = []; //ranked meaning they have 3 or more games recorded
         const unranked = []; //unranked meaning they have less then 3 games recorded
 
