@@ -6,10 +6,15 @@
 #include "Player.h"
 using namespace std;
 
-//accepts a number between -14 and 14 and uses logistic function to get a number between 0 and 1 where -14 point
-//difference is almost 0 and, equal score is 0.5 and +14 points is almost 1
+//make maxScore a global variable otherwise it'll have to be passed through almost every function
+int maxScore;
+
+////Calculate ELO adjustments between players
+
+//accepts a number between -maxScore and maxScore and uses logistic function to get a number between 0 and 1 where -maxScore point
+//difference is almost 0 and, equal score is 0.5 and +maxScore points is almost 1
 double getScorePercent(int scoreDifference) {
-    return 1/(1+pow(10,-0.13*scoreDifference));
+    return 1/(1+pow(10, -1.82*((double)scoreDifference/maxScore)));
 }
 
 //performs elo calculation by using rank difference between two players to create an expected score (point difference
@@ -34,7 +39,8 @@ int getEloAdjustmentFirstPlace(int elo, int opponentsElo, int K) {
 
 int getEloAdjustmentFirstPlace(Player* playerA, Player* playerB, int K) {
     return getEloAdjustmentFirstPlace(playerA->getRank(), playerB->getRank(), K);
-}
+}  
+
 
 //recursive function to compare all players score to eachother
 void compareRecurse(map<Player*, pair<int, int>>& players, vector<Player*>& playerOrder,
@@ -81,46 +87,55 @@ void compareRecurse(map<Player*, pair<int, int>>& players, vector<Player*>& play
     compareRecurse(players, playerOrder, it1, ++it2); //increase second iterator
 }
 
+//// Extract functions from main to make main simpler
+
+Player* getPlayer(int playerNum) {
+    if (playerNum == 0) {
+        cout << "Winner" << endl;
+    }
+    else {
+        cout << "Player " << playerNum+1 << endl;
+    }
+    cout << "Enter Player Name: ";
+    string name;
+    cin >> name;
+
+    cout << "Enter Player Race: ";
+    string race;
+    cin >> race;
+
+    cout << "Enter Player Rank: ";
+    int rank;
+    cin >> rank;
+
+    cout << "Enter Race Rank: ";
+    int raceRank;
+    cin >> raceRank;
+
+    cout << "Enter Player Score: ";
+    int score;
+    cin >> score;
+
+    Player* newplayer = new Player(name, race, rank, raceRank, score);
+    return newplayer;
+}
+
 int main() {
     cout << "Enter Player Count: ";
     int playerCount;
     cin >> playerCount;
+
+    cout << "Enter Max Score: ";
+    cin >> maxScore;
 
     map<Player*, pair<int, int>>players; //stores each player and their rank adjustment and their race rank adjustment
     vector<Player*> playerOrder; //preserve the order players are entered
 
 
     //input each player
-    for(int i = 0; i < playerCount;) {
-        if (i == 0) {
-            cout << "Winner" << endl;
-            ++i;
-        }
-        else {
-            cout << "Player " << ++i << endl;
-        }
-        cout << "Enter Player Name: ";
-        string name;
-        cin >> name;
-
-        cout << "Enter Player Race: ";
-        string race;
-        cin >> race;
-
-        cout << "Enter Player Rank: ";
-        int rank;
-        cin >> rank;
-
-        cout << "Enter Race Rank: ";
-        int raceRank;
-        cin >> raceRank;
-
-        cout << "Enter Player Score: ";
-        int score;
-        cin >> score;
-
-        Player* newplayer = new Player(name, race, rank, raceRank, score);
-        players[newplayer] = { 0, 0 };
+    for(int i = 0; i < playerCount;i++) {
+        Player* newplayer = getPlayer(i);
+        players[newplayer] = {0, 0};
         playerOrder.push_back(newplayer);
     }
 
@@ -128,6 +143,7 @@ int main() {
     auto it1 = playerOrder.begin();
     compareRecurse(players, playerOrder, it1, next(it1));
 
+    //TODO: Less spaghetti way of printing table
     cout << left << setw(10) << "Player";
     cout << " | ";
     cout << left << setw(5) << "Score";
