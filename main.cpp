@@ -14,7 +14,9 @@ int maxScore;
 //accepts a number between -maxScore and maxScore and uses logistic function to get a number between 0 and 1 where -maxScore point
 //difference is almost 0 and, equal score is 0.5 and +maxScore points is almost 1
 double getScorePercent(int scoreDifference) {
-    return 1/(1+pow(10, -1.82*((double)scoreDifference/maxScore)));
+    double steepness = -1.82; //negative number that determines the "steepness" of the logistics function, larger
+                              //number means score differences approach +/- 1 quicker
+    return 1/(1+pow(10, steepness*((double)scoreDifference/maxScore)));
 }
 
 //performs elo calculation by using rank difference between two players to create an expected score (point difference
