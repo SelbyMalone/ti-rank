@@ -89,39 +89,6 @@ void compareRecurse(map<Player*, pair<int, int>>& players, vector<Player*>& play
     compareRecurse(players, playerOrder, it1, ++it2); //increase second iterator
 }
 
-//// Extract functions from main to make main simpler
-
-Player* getPlayer(int playerNum) {
-    if (playerNum == 0) {
-        cout << "Winner" << endl;
-    }
-    else {
-        cout << "Player " << playerNum+1 << endl;
-    }
-    cout << "Enter Player Name: ";
-    string name;
-    cin >> name;
-
-    cout << "Enter Player Race: ";
-    string race;
-    cin >> race;
-
-    cout << "Enter Player Rank: ";
-    int rank;
-    cin >> rank;
-
-    cout << "Enter Race Rank: ";
-    int raceRank;
-    cin >> raceRank;
-
-    cout << "Enter Player Score: ";
-    int score;
-    cin >> score;
-
-    Player* newplayer = new Player(name, race, rank, raceRank, score);
-    return newplayer;
-}
-
 int main() {
     cout << "Enter Player Count: ";
     int playerCount;
@@ -133,10 +100,14 @@ int main() {
     map<Player*, pair<int, int>>players; //stores each player and their rank adjustment and their race rank adjustment
     vector<Player*> playerOrder; //preserve the order players are entered
 
-
     //input each player
     for(int i = 0; i < playerCount;i++) {
-        Player* newplayer = getPlayer(i);
+        if (i == 0) {
+            cout << "Winner" << endl;
+        } else {
+            cout << "Player " << i+1 << endl;
+        }
+        Player* newplayer = new Player();
         players[newplayer] = {0, 0};
         playerOrder.push_back(newplayer);
     }

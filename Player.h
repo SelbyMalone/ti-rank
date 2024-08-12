@@ -21,6 +21,7 @@ class Player {
             this->score = score; //final score in game
             num = count++;
         }
+        Player(); //constructor to prompt user input for Player
         std::string getName();
         std::string getRace();
         int getRank();

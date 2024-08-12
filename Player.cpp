@@ -1,4 +1,22 @@
+#include <iostream>
 #include "Player.h"
+
+Player::Player() {
+    std::cout << "Enter Player Name: ";
+    std::cin >> this->name;
+
+    std::cout << "Enter Player Race: ";
+    std::cin >> this->race;
+
+    std::cout << "Enter Player Rank: ";
+    std::cin >> this->rank;
+
+    std::cout << "Enter Race Rank: ";
+    std::cin >> this->raceRank;
+
+    std::cout << "Enter Player Score: ";
+    std::cin >> this->score;
+}
 
 std::string Player::getName() {
     return name;
