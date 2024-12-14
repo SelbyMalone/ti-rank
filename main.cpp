@@ -1,15 +1,17 @@
 #include <iostream>
 #include <iomanip>
+#include <string>
 #include <cmath>
 #include <map>
 #include <vector>
+#include <algorithm>
 #include "Player.h"
 using namespace std;
 
 //make maxScore a global variable otherwise it'll have to be passed through almost every function
 int maxScore;
 
-////Calculate ELO adjustments between players
+// == Calculate ELO adjustments between players == //
 
 //accepts a number between -maxScore and maxScore and uses logistic function to get a number between 0 and 1 where -maxScore point
 //difference is almost 0 and, equal score is 0.5 and +maxScore points is almost 1
@@ -88,6 +90,43 @@ void compareRecurse(map<Player*, pair<int, int>>& players, vector<Player*>& play
 
     compareRecurse(players, playerOrder, it1, ++it2); //increase second iterator
 }
+
+// == Print Table Logic == //
+
+//
+int* getColSizes(vector<string>row, int numCols) {
+    int* sizes = new int[numCols];
+
+    for(int i = 0; i < numCols; i++) {
+        sizes[i] = row[i].length();
+    }
+    
+    return sizes;
+}
+
+int* maxArray(int* arrX, int* arrY, int numCols) {
+    int* result = new int[numCols];
+
+    for (int i = 0; i < numCols; i++) {
+        result[i] = max(arrX[i], arrY[i]);
+    }
+
+    return result;
+}
+
+//accepts vector of col headers, and vector of arrays for each row
+void printTable(vector<string>headers, vector<string*>rows) {
+    int numCols = headers.size();
+    int* colSizes = getColSizes(headers, numCols);
+
+    // Iterate all rows, set colSize[i] to max value from that col each iteration
+    
+    for(int i = 0; i < rows.size(); i++) {
+        colSizes[i] = maxArray(colSizes, rows[i], numCols);
+    }
+}
+
+// == Main == //
 
 int main() {
     cout << "Enter Player Count: ";
