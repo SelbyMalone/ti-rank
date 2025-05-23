@@ -5,7 +5,7 @@ import { usePlayers } from 'js/firebaseScripts'
 import { getRankColor } from 'js/getRankColor.js'
 
 
-function App() {
+function GamesPage() {
     const { rankedPlayers, unrankedPlayers } = usePlayers('uYmHldpJVY2K0uiEH99L');
 
     return (
