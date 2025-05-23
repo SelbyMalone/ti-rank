@@ -50,7 +50,7 @@ body {
 
 .main-content {
     flex: 4;
-    background: #223158 url('../public/background.jpg') no-repeat center center; 
+    background: #223158 url('/public/background.jpg') no-repeat center center; 
     background-size: 100% 100%;
     min-height: 100vh;
 }

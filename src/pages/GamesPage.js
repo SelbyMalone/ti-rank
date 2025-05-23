@@ -1,7 +1,7 @@
 import React from 'react';
-import './App.css';
-import { usePlayers } from './firebaseScripts'
-import { getRankColor } from './getRankColor.js'
+import './GamesPage.css';
+import { usePlayers } from 'js/firebaseScripts'
+import { getRankColor } from 'js/getRankColor.js'
 
 
 function App() {
