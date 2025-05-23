@@ -4,6 +4,10 @@
     box-sizing: border-box;
 }
 
+body {
+  background: #24273a;
+}
+
 .App {
     text-align: center;
 }
@@ -17,8 +21,8 @@
     display: flex;
     align-items: center;
     justify-content:center;
-    background-color: #282c34;
-    color: white;
+    background-color: #24273a;
+    color: #cad3f5;
     padding: 15px;
     font-size: 20px;
     width: 100%;
@@ -47,15 +51,17 @@
 .main-content {
     flex: 4;
     background: #223158 url('../public/background.jpg') no-repeat center center; 
-    background-size: cover;
+    background-size: 100% 100%;
+    min-height: 100vh;
 }
 
 /* side bar styling */
 
 .sidebar {
     flex: 1;
-    background-color: #ccc;
+    background-color: #363a4f;
     text-align: center;
+    overflow: scroll;
 }
 
 

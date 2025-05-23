@@ -5,6 +5,7 @@
 /src/cpp/out
 /src/cpp/build
 /src/cpp/cmake-build-debug
+/src/js/firebaseConfig.js
 /cmake-build-debug
 CMakePresets.json
 
