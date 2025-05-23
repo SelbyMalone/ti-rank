@@ -1,8 +1,14 @@
 import React from 'react';
-import GamePage from './pages/GamesPage.js';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import GamesPage from './pages/GamesPage.js';
 
 function App() {
-  return <GamePage />
+    return (
+        <Router>
+            <Routes>
+                <Route path = "/:groupId" element={<GamesPage/>}/>
+            </Routes>
+        </Router>
+    )
 }
-
 export default App;

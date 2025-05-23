@@ -49,8 +49,13 @@ body {
 /* main content area styling */
 
 .main-content {
-    flex: 4;
+    flex: 1;
     background: #223158 url('/public/background.jpg') no-repeat center center; 
     background-size: 100% 100%;
     min-height: 100vh;
+}
+
+.sidebar {
+  width: 375px;
+  overscroll-behavior: contain;
 }
