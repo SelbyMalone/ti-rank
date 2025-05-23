@@ -1,24 +1,27 @@
 /* side bar styling */
-
 .sidebar {
-    flex: 1;
-    background-color: #363a4f;
+    display: flex;;
+    flex-direction: column;
+    height: 100%;
+    width: 375px;
+    background-color: #24273a;
     text-align: center;
-    overflow-x: hidden;
-    overflow-y: scroll;
 }
 
+.scroll-content {
+  overflow-y: scroll;
+  overscroll-behavior: none;
+}
 
 .player-box {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    height: 35px;
+    height: 40px;
     width: 100%;
     padding: 0 25px;
     box-sizing: border-box;
 }
-
 
 .player-name {
     text-align: left;

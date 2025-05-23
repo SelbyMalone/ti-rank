@@ -6,12 +6,7 @@ import { getRankColor } from 'js/getRankColor.js'
 
 
 function App() {
-    const { rankedPlayers, unrankedPlayers } = usePlayers();
-
-    // format numbers with commas
-    const formatNumberWithCommas = (number) => {
-        return new Intl.NumberFormat('en-US').format(number);
-    };
+    const { rankedPlayers, unrankedPlayers } = usePlayers('uYmHldpJVY2K0uiEH99L');
 
     return (
         <div className="app row-flex">
