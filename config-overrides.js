@@ -5,6 +5,7 @@ module.exports = function override(config) {
   config.resolve.alias = {
     ...config.resolve.alias,
     js: path.resolve(__dirname, 'src/js'),
+    components: path.resolve(__dirname, 'src/components'),
     public: path.resolve(__dirname, 'public')
   };
   return config;

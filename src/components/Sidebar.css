@@ -1,0 +1,72 @@
+/* side bar styling */
+
+.sidebar {
+    flex: 1;
+    background-color: #363a4f;
+    text-align: center;
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
+
+
+.player-box {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 35px;
+    width: 100%;
+    padding: 0 25px;
+    box-sizing: border-box;
+}
+
+
+.player-name {
+    text-align: left;
+    display: inline-block;
+    width: 80px;
+}
+
+.player-rank {
+    text-align: right;
+    font-family: "Lucida Console", "monospace";
+    display: inline-block;
+    width: 70px; /* Adjust this value as needed to align the numbers */
+}
+
+
+/* rank colors */
+
+.bronze {
+    background-color: #dc935c;
+}
+
+.bronze-dark {
+    background-color: #d9884c;
+}
+
+.silver {
+    background-color: #D8D8D8;
+}
+
+.silver-dark {
+    background-color: #cecece;
+}
+
+
+.gold {
+    background-color: #FDE37F;
+}
+
+.gold-dark {
+    background-color: #fddf6c;
+}
+
+.unranked {
+    background-color: #f37360;
+}
+
+.unranked-dark {
+    background-color: #f2634e;
+}
+
+
