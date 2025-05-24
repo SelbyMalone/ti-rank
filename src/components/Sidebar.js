@@ -14,6 +14,7 @@ function Sidebar({rankedPlayers, unrankedPlayers}) {
           
           <div className="scroll-content">
               {rankedPlayers.map((player, index) => {
+                  console.log(player, index);
                   let rankColor = getRankColor(player.rank);
                   const isEvenRow = index % 2 === 0;
 

@@ -1,11 +1,12 @@
-import './GamesPage.css';
-import Sidebar from 'components/Sidebar';
+import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 import { db } from 'js/firebaseConfig.js';
 import { getRankColor } from 'js/getRankColor.js';
-import { useParams } from 'react-router-dom';
 import { collection, getDocs } from 'firebase/firestore';
-import React, { useEffect, useState } from 'react';
 
+import './GamesPage.css';
+
+import Sidebar from 'components/Sidebar';
 
 function GamesPage() {
     
