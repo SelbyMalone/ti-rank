@@ -1,0 +1,7 @@
+.PlayerDetails {
+    margin: 50px;
+}
+.PlayerDetails * {
+    margin-top: 10px;
+    color: white;
+}

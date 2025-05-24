@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { db } from 'js/firebaseConfig.js';
 import { collection, getDocs } from 'firebase/firestore';
 import './Sidebar.css'
@@ -10,9 +10,9 @@ function Sidebar(group) {
     // === Hooks === //
 
     // query Firestore and log the results
-    const getPlayers = async () => {
+    const getPlayers = async (group) => {
         try {
-            const querySnapshot = await getDocs(collection(db, `/Groups/${groupId}/Players`));
+            const querySnapshot = await getDocs(collection(db, `/Groups/${group}/Players`));
             const ranked = []; //ranked meaning they have 3 or more games recorded
             const unranked = []; //unranked meaning they have less then 3 games recorded
 
@@ -30,13 +30,13 @@ function Sidebar(group) {
         }
     };
 
-    const usePlayers = (group) => {
+    const usePlayers = (groupId) => {
         const [rankedPlayers, setRankedPlayers] = useState([]);
         const [unrankedPlayers, setUnrankedPlayers] = useState([]);
 
         useEffect(() => {
             const fetchPlayers = async () => {
-                const { ranked, unranked } = await getPlayers(group);
+                const { ranked, unranked } = await getPlayers(groupId);
 
                 //sort out players by rank
                 ranked.sort((a, b) => b.rank - a.rank);
@@ -57,11 +57,20 @@ function Sidebar(group) {
     }
 
     const { groupId } = useParams()
-    const { rankedPlayers, unrankedPlayers } = usePlayers(group);
+    const { rankedPlayers, unrankedPlayers } = usePlayers(groupId);
+
+    // === Scripts === //
 
     const formatNumberWithCommas = (number) => {
         return new Intl.NumberFormat('en-US').format(number)
     };
+
+
+    const navigate = useNavigate()
+
+    const handleNavigate = (playerID) => {
+        navigate(`./${playerID}`);
+    }
 
     // === HTML === //
 
@@ -79,7 +88,7 @@ function Sidebar(group) {
                     rankColor = isEvenRow ? rankColor : rankColor.concat("-dark")
                     
                     return (
-                        <div key={player.name} className={`player-box ${rankColor}`}>
+                        <div key={player.name} className={`player-box ${rankColor}`} onClick={() => handleNavigate(player.name)}>
                             <span className="player-name">{player.name}</span>
                             <span className="player-rank">{formatNumberWithCommas(player.rank)}</span>
                         </div>
