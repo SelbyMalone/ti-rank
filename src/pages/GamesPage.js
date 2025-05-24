@@ -1,14 +1,15 @@
-import React from 'react';
 import './GamesPage.css';
 import Sidebar from 'components/Sidebar';
-import { usePlayers } from 'js/firebaseScripts';
+import { db } from 'js/firebaseConfig.js';
 import { getRankColor } from 'js/getRankColor.js';
 import { useParams } from 'react-router-dom';
+import { collection, getDocs } from 'firebase/firestore';
+import React, { useEffect, useState } from 'react';
 
 
 function GamesPage() {
-    const { groupId } = useParams()
-    const { rankedPlayers, unrankedPlayers } = usePlayers(groupId);
+    
+    // === Hooks === //
 
     // query Firestore and log the results
     const getPlayers = async (group) => {
@@ -31,13 +32,13 @@ function GamesPage() {
         }
     };
 
-    export const usePlayers = (group) => {
+    const usePlayers = (group) => {
         const [rankedPlayers, setRankedPlayers] = useState([]);
         const [unrankedPlayers, setUnrankedPlayers] = useState([]);
 
         useEffect(() => {
             const fetchPlayers = async () => {
-                const { ranked, unranked } = await getPlayers();
+                const { ranked, unranked } = await getPlayers(group);
 
                 //sort out players by rank
                 ranked.sort((a, b) => b.rank - a.rank);
@@ -56,6 +57,11 @@ function GamesPage() {
 
         return { rankedPlayers, unrankedPlayers };
     }
+
+    const { groupId } = useParams()
+    const { rankedPlayers, unrankedPlayers } = usePlayers(groupId);
+
+    // === HTML === //
 
     return (
         <div className="app row-flex">
