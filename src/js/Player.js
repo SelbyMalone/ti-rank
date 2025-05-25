@@ -1,12 +1,13 @@
 import { db } from 'js/firebaseConfig.js';
-import { doc, getDoc } from 'firebase/firestore';
+import { doc, getDoc, setDoc } from 'firebase/firestore';
 
 
 export class Player {
-	constructor(name, rank, gameCount) {
+	constructor(name, rank, gameCount, playerRef) {
 		this.name = name;
 		this.rank = rank;
 		this.gameCount = gameCount;
+		this.playerRef = playerRef;
 	}
 	
 	//static factory from firestore groupID and playerName
@@ -18,10 +19,15 @@ export class Player {
 			return new Player(
 				playerSnap.id,
 				playerSnap.data().Rank,
-				playerSnap.data().GameCount
+				playerSnap.data().GameCount,
+				playerRef
 			);
 		} else {
 			throw new Error('Player not found')
 		}
+	}
+
+	setRank(rank) {
+
 	}
 }
