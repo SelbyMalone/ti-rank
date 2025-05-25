@@ -27,7 +27,23 @@ export class Player {
 		}
 	}
 
-	setRank(rank) {
+	async setRank(rank) {
+		try {
+			setDoc(this.playerRef, {
+				Rank: rank
+			}, {merge: true});
+		} catch (error) {
+			console.log("Error setting rank", error);
+		}
+	}
 
+	async setGameCount(gameCount) {
+		try {
+			setDoc(this.playerRef, {
+				GameCount: gameCount
+			}, {merge:true});
+		} catch (error) {
+			console.log("Error setting rank", error);
+		}
 	}
 }

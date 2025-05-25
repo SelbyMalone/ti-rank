@@ -21,7 +21,7 @@ function PlayerDetails() {
 				}
 			}
 			fetchPlayer();
-		}, []);
+		}, [player]);
 		return { player };
 	} 
 
