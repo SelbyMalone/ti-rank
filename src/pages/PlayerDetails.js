@@ -1,55 +1,43 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { db } from 'js/firebaseConfig.js'
-import { collection, getDoc, doc } from 'firebase/firestore'
 
+import { Player } from 'js/Player.js'
 import './PlayerDetails.css';
 
 function PlayerDetails() {
 
-    // === Hooks === //
+	// === Hooks === //
     
-    const getPlayer = async (groupId, playerName) => {
-        const playerRef = doc(db, `/Groups/${groupId}/Players`, playerName);
-        const playerSnap = await getDoc(playerRef);
+	const usePlayer = (groupId, playerName) => {
+		const [player, setPlayer] = useState([]);
 
-        if(playerSnap.exists()) {
-            return {
-                name: playerSnap.id,
-                rank: playerSnap.data().Rank,
-                gameCount: playerSnap.data().GameCount
-            };
-        } else {
-            throw new Error('Player not found')
-        }
-    }
+		useEffect(() => {
+			const fetchPlayer = async () => {
+				try {
+					const playerData = await Player.fromFirestore(groupId, playerName);
+					setPlayer(playerData);
+				} catch (error) {
+					console.warn(error.message);
+				}
+			}
+			fetchPlayer();
+		}, []);
+		return { player };
+	} 
 
-    const usePlayer = (groupId, playerName) => {
-        const [player, setPlayer] = useState([]);
+	const { groupId, playerName } = useParams();
+	const { player } = usePlayer(groupId, playerName)
 
-        useEffect(() => {
-            const fetchPlayer = async () => {
-                const player = await getPlayer(groupId, playerName);
-                setPlayer(player);
-            }
-            fetchPlayer();
-        }, []);
-        return { player };
-    } 
+	// === HTML === //
 
-    const { groupId, playerName } = useParams();
-    const { player } = usePlayer(groupId, playerName)
-
-    // === HTML === //
-
-    return (
-        <div className="PlayerDetails">
-            <h1> Page in development </h1>
-            <p>Player: {player.name}</p>
-            <p>Player Rank: {player.rank}</p>
-            <p>Player Games: {player.gameCount}</p>
-        </div>
-    );
+	return (
+		<div className="PlayerDetails">
+			<h1> Page in development </h1>
+			<p>Player: {player.name}</p>
+			<p>Player Rank: {player.rank}</p>
+			<p>Player Games: {player.gameCount}</p>
+		</div>
+	);
 }
 
 export default PlayerDetails;
