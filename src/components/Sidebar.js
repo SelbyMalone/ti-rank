@@ -19,7 +19,7 @@ function Sidebar(group) {
 
 			querySnapshot.forEach((player) => {
 				const playerData = new Player(
-					player.id,
+					player.data().Name,
 					player.data().Rank,
 					player.data().GameCount,
 					doc(db, `/Groups/${group}/Players`, player.id)

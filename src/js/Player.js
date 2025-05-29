@@ -1,5 +1,5 @@
 import { db } from 'js/firebaseConfig.js';
-import { doc, getDoc, setDoc } from 'firebase/firestore';
+import { doc, getDocs, collection, query, where, setDoc } from 'firebase/firestore';
 
 
 export class Player {
@@ -12,14 +12,16 @@ export class Player {
 	
 	//static factory from firestore groupID and playerName
 	static async fromFirestore(groupId, playerName) {
-		const playerRef = doc(db, `/Groups/${groupId}/Players`, playerName);
-		const playerSnap = await getDoc(playerRef);
+		const playerRef = collection(db, `/Groups/${groupId}/Players`);
+		const q = query(playerRef, where("Name", "==", playerName));
+		const playerSnap = await getDocs(q);
+		const playerDetails = playerSnap.docs[0]
 
-		if(playerSnap.exists()) {
+		if(playerDetails.exists()) {
 			return new Player(
-				playerSnap.id,
-				playerSnap.data().Rank,
-				playerSnap.data().GameCount,
+				playerDetails.data().Name,
+				playerDetails.data().Rank,
+				playerDetails.data().GameCount,
 				playerRef
 			);
 		} else {
