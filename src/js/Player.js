@@ -22,10 +22,20 @@ export class Player {
 				playerDetails.data().Name,
 				playerDetails.data().Rank,
 				playerDetails.data().GameCount,
-				playerRef
+				playerDetails.ref
 			);
 		} else {
 			throw new Error('Player not found')
+		}
+	}
+
+	async setName(name) {
+		try {
+			setDoc(this.playerRef, {
+				Name: name
+			}, {merge: true});
+		} catch (error) {
+			console.log("Error setting rank", error);
 		}
 	}
 

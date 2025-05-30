@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 
 import { Player } from 'js/Player.js'
 import './PlayerDetails.css';
+import { doc, getDoc } from "firebase/firestore";
 
 function PlayerDetails() {
 
@@ -28,11 +29,11 @@ function PlayerDetails() {
 	const { groupId, playerName } = useParams();
 	const { player } = usePlayer(groupId, playerName)
 
-	// === HTML === //
-
+	// === HTML === //	
+	
 	return (
 		<div className="PlayerDetails">
-			<h1> Page in development </h1>
+			<h1>Page in development</h1>
 			<p>Player: {player.name}</p>
 			<p>Player Rank: {player.rank}</p>
 			<p>Player Games: {player.gameCount}</p>
