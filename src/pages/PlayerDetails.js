@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 import { Player } from 'js/Player.js'
 import './PlayerDetails.css';
@@ -22,21 +22,56 @@ function PlayerDetails() {
 				}
 			}
 			fetchPlayer();
-		}, [player]);
+		}, [groupId, playerName]);
 		return { player };
 	} 
 
 	const { groupId, playerName } = useParams();
-	const { player } = usePlayer(groupId, playerName)
+	const { player } = usePlayer(groupId, playerName);
+
+	//form elements
+	const [formVals, setFormVals] = useState("");
+	let navigate = useNavigate();
+
+	const handleChange = (event) => {
+		const name = event.target.name;
+		const value = event.target.value;
+		setFormVals(values => ({...values, [name]: value}))
+	}
+
+	const handleSubmit = (event) => {
+		event.preventDefault();
+		player.setName(formVals.name);
+		player.setRank(formVals.rank);
+		player.setGameCount(formVals.gameCount);
+		navigate("/"+groupId+"/"+formVals.name);
+	}
 
 	// === HTML === //	
 	
 	return (
 		<div className="PlayerDetails">
-			<h1>Page in development</h1>
-			<p>Player: {player.name}</p>
-			<p>Player Rank: {player.rank}</p>
-			<p>Player Games: {player.gameCount}</p>
+			<form onSubmit={handleSubmit}>
+				<h1>Page in development</h1>
+				<div class="PlayerDetailRow">
+					<p>Player: {player.name}</p>
+					<p>change name:</p>
+					<input type="text" name="name" value={formVals.name || ""} onChange={handleChange}/>
+				</div>
+				<div class="PlayerDetailRow">
+					<p>Player Rank: {player.rank}</p>
+					<p>change rank:</p>
+					<input type="text" name="rank" value={formVals.rank || ""} onChange={handleChange}/>
+				</div>
+				<div class="PlayerDetailRow">
+					<p>Player Games: {player.gameCount}</p>
+					<p>change Game Count:</p>
+					<input type="text" name="gameCount" value={formVals.gameCount || ""} onChange={handleChange}/>
+				</div>
+				<div class="PlayerDetailRow">
+					<p/><p/><input type="submit" value="submit"/>
+				</div>
+			</form>
 		</div>
 	);
 }

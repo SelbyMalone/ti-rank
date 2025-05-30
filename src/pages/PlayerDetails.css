@@ -3,5 +3,14 @@
 }
 .PlayerDetails * {
     margin-top: 10px;
-    color: white;
+}
+.PlayerDetails h1, p {
+	color: white;
+	width: 25%;
+}
+.PlayerDetailRow {
+	display: flex;
+	flex-direction: row;
+	justify-content: left;
+	align-items: center;
 }
