@@ -2,9 +2,10 @@
 	background-color: rgba(54, 58, 79, 0.5);
 	margin: 20px;
 	padding: 20px 40px;
-	backdrop-filter: blur(2.5px);
+	backdrop-filter: blur(5px);
 	border: 2px solid #8aadf4;
 	border-radius: 7px;
+	flex: 1;
 }
 .PlayerDetails * {
 	margin-top: 10px;

@@ -1,61 +1,60 @@
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
 }
 
 body {
-  background: #24273a;
+	background: #24273a;
 }
 
 .App {
-    text-align: center;
-}
-
-.row-flex {
-    display: flex;
-    height: 100vh;
+	text-align: center;
+	height: 100vh;
+	display: flex;
+	flex-direction: column;
 }
 
 .header {
-    display: flex;
-    align-items: center;
-    justify-content:center;
-    background-color: #24273a;
-    color: #cad3f5;
-    padding: 15px;
-    font-size: 20px;
-    width: 100%;
-    position: relative;
+	display: flex;
+	width: 100%;
+	align-items: center;
+	justify-content:center;
+	background-color: #24273a;
+	color: #cad3f5;
+	padding: 15px;
+	font-size: 20px;
+	position: relative;
+	box-shadow: 0px 3px 3px 1px rgba(30, 32, 48, 0.5);
 }
 
 .header-text {
-    padding: 0px 25px;
-    flex-grow: 1;
-}
-
-.header-left-text {
-    flex-grow: 1;
-    text-align: left;
-    padding: 0px 25px;
-}
-
-
-.header-subtext-right {
-    font-size: 15px;
-    text-align: right;
+	padding: 0px 25px;
+	flex-grow: 1;
 }
 
 /* main content area styling */
 
 .main-content {
-    flex: 1;
-    background: #223158 url('/public/background.jpg') no-repeat center center; 
-    background-size: 100% 100%;
-    min-height: 100vh;
+	display: flex;
+	flex: 1;
+	width: 100%;
+	min-height: 0;
+	background: #223158 url('/public/background.jpg') no-repeat center center; 
+	background-size: 100% 100%;
 }
 
-.sidebar {
-  width: 375px;
-  overscroll-behavior: contain;
+.ContentBox {
+	display: flex;
+	flex-direction: column;
+	flex: 1;
+	overflow: hidden;
+}
+
+.SidebarBox {
+	display: flex;
+	flex-direction: column;
+	width: 375px;
+	min-height: 0;
+	overflow: hidden;
 }

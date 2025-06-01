@@ -1,76 +1,93 @@
 /* side bar styling */
 .sidebar {
-    display: flex;;
-    flex-direction: column;
-    height: 100%;
-    background-color: #24273a;
-    text-align: center;
+	display: flex;
+	flex: 1;
+	flex-direction: column;
+	width: 375px;
+	background-color: #313244;
+	text-align: center;
+	overflow-y: scroll;
+	overscroll-behavior: contain;
+	scrollbar-color: #363a4f rgba(0,0,0,0);
 }
 
-.scroll-content {
-    overflow-y: scroll;
-    overscroll-behavior: none;
-    scrollbar-color: #363a4f rgba(0,0,0,0);
+.sidebarHeader {
+	display: flex;
+	align-items: center;
+	width: 100%;
+	justify-content:center;
+	background-color: #313244;
+	color: #cad3f5;
+	padding: 15px;
+	font-size: 20px;
+}
+
+.sidebarHeader-left {
+	flex: 3;
+}
+
+.sidebarHeader-subtext {
+	flex: 1;
+	font-size: 12px;
+	padding: 2px;
 }
 
 .player-box {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    height: 40px;
-    width: 100%;
-    padding: 0 25px;
-    box-sizing: border-box;
-	 cursor: pointer;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	height: 40px;
+	width: 100%;
+	padding: 0 25px;
+	box-sizing: border-box;
+	cursor: pointer;
+	min-height: 40px;
 }
 
 .player-name {
-    text-align: left;
-    display: inline-block;
-    width: 80px;
+	display: inline-block;
+	text-align: left;
+	width: 80px;
 }
 
 .player-rank {
-    text-align: right;
-    font-family: "Lucida Console", "monospace";
-    display: inline-block;
-    width: 70px; /* Adjust this value as needed to align the numbers */
+	display: inline-block;
+	text-align: right;
+	font-family: "Lucida Console", "monospace";
+	width: 70px; /* Adjust this value as needed to align the numbers */
 }
 
 
 /* rank colors */
 
 .bronze {
-    background-color: #dc935c;
+	background-color: #dc935c;
 }
 
 .bronze-dark {
-    background-color: #d9884c;
+	background-color: #d9884c;
 }
 
 .silver {
-    background-color: #D8D8D8;
+	background-color: #D8D8D8;
 }
 
 .silver-dark {
-    background-color: #cecece;
+	background-color: #cecece;
 }
 
-
 .gold {
-    background-color: #FDE37F;
+	background-color: #FDE37F;
 }
 
 .gold-dark {
-    background-color: #fddf6c;
+	background-color: #fddf6c;
 }
 
 .unranked {
-    background-color: #f37360;
+	background-color: #ee99a0;
 }
 
 .unranked-dark {
-    background-color: #f2634e;
+	background-color: #ed8796;
 }
-
-

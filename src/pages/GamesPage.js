@@ -12,14 +12,18 @@ function GamesPage() {
 	}
 
 	return (
-		<div className="app row-flex">
-			<div className="main-content">
-				<div className="header">
-					Game History
-				</div>
-				<Outlet context={{refreshSidebar: refreshSidebarRef}} />
+		<div className="App">
+			<div className="header">
+				Game History
 			</div>
-			<Sidebar className="Sidebar" callback={callbackRefreshSidebar}/>
+			<div className="main-content">
+				<div className="ContentBox">
+					<Outlet context={{refreshSidebar: refreshSidebarRef}} />
+				</div>
+				<div className="SidebarBox">
+					<Sidebar className="SidebarBox" callback={callbackRefreshSidebar}/>
+				</div>
+			</div>
 		</div>
 	);
 }
