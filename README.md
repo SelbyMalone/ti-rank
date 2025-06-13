@@ -18,7 +18,7 @@ A ranking system made for my overcompetitve Twilight Imperium board game group t
 # Elo
 Elo is a system used for ranking two players in a 1v1 game.  Both players have a rank number, and when they play a game against eachother, the difference in their rank is used to determine an expected score for a game, which is a number between 0 and 1.  This is compared to the actual results of a game where a victory is 1, a loss is 0 and a draw is 0.5, depending on how much this number varies from the expected score, each player will have their rank increased/decreased.
 ## My Variation
-The first variation I needed to make to my system was accounting for upto 8 players, the way I did this was by making each player compare their rank differenec to all other players to determine their "expected score", and then comparing that to the actual score difference between two players.  
+The first variation I needed to make to my system was accounting for up to 8 players, the way I did this was by making each player compare their rank difference to all other players to determine their "expected score", and then comparing that to the actual score difference between two players.  
 ![image](https://user-images.githubusercontent.com/31752555/214208073-219786d6-8407-407e-b51e-a237f9200fa3.png)  
 This method was chosen as it scales with player count, scoring 14 points is harder in an 8 player game then a 4 player game, this method means the system performs a rank adjustment with the winner scoring higher then 7 other players in an 8 player game (and therefore increasing their rank by a larger amount)  
   
